@@ -1,26 +1,74 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 
-class VistaSolicitandoNombre extends StatelessWidget {
-  const VistaSolicitandoNombre({super.key});
+class VistaSolicitandoNombre extends StatefulWidget {
+  const VistaSolicitandoNombre({Key? key}) : super(key: key);
+
+  @override
+  State<VistaSolicitandoNombre> createState() => _VistaSolicitandoNombreState();
+}
+
+class _VistaSolicitandoNombreState extends State<VistaSolicitandoNombre> {
+  bool _usuarioValidado = false;
+  late final TextEditingController controlador;
+
+  @override
+  void initState() {
+    controlador = TextEditingController();
+    controlador.addListener(escuchandoValidador);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final controlador = TextEditingController();
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Nombre de dogs"),
-      ),
-      body: Column(
-        children: [
-          Text("Escribe el nombre de un perro"),
-          TextField(
-            controller: controlador,
+    return Padding(
+      padding: const EdgeInsets.all(10.0),
+      child: Column(children: [
+        TextField(
+          obscureText: true,
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Usuario',
           ),
-          TextButton(onPressed: () {}, child: const Text("Buscar"))
-        ],
-      ),
+          controller: controlador,
+        ),
+        Container(
+            child: TextButton(
+                style: ButtonStyle(
+                  foregroundColor: _usuarioValidado
+                      ? MaterialStateProperty.all<Color>(Colors.black)
+                      : MaterialStateProperty.all<Color>(Colors.grey),
+                ),
+                onPressed: _usuarioValidado ? () {} : null,
+                child: const Text('Ingresar'))),
+      ]),
     );
   }
+
+  void escuchandoValidador() {
+    setState(() {
+      try {
+        Validador(controlador.text);
+        _usuarioValidado = true;
+      } catch (e) {
+        _usuarioValidado = false;
+      }
+    });
+  }
 }
+
+class Validador {
+  late final String value;
+  Validador(String propuesta) {
+    if ((propuesta.trim().isEmpty)) {
+      throw UsuarioError();
+    }
+    value = propuesta;
+  }
+}
+
+class UsuarioError implements Exception {}

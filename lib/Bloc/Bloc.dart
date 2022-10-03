@@ -8,7 +8,7 @@ class Estados {}
 
 class Creandose extends Estados {}
 
-class SolicitandoNombre extends Estados{}
+class SolicitandoNombre extends Estados {}
 
 class BlocVerificacion extends Bloc<Eventos, Estados> {
   BlocVerificacion() : super(Creandose()) {
