@@ -38,10 +38,10 @@ class Aplicacion extends StatelessWidget {
               var estado = context.watch<BlocVerificacion>().state;
 
               if (estado is SolicitandoNombre) {
-                return VistaSolicitandoNombre();
+                return const VistaSolicitandoNombre();
               }
 
-              return Center(child: Text('HUYE'));
+              return const Center(child: Text('HUYE'));
             }),
           ),
         ));
