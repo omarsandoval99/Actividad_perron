@@ -21,16 +21,20 @@ class SolicitandoNombre extends Estados {}
 
 class EsperandoConfirmarNombre extends Estados {}
 
-class MostrandoSolicitudActualizacion extends Estados {}
+class MostrandoNoEncontrado extends Estados {
+  final NickFormado nick;
+  MostrandoNoEncontrado(this.nick);
+}
 
 class MostrandoNombreConfirmado extends Estados {
   final RegistroRaza registroraza;
-  MostrandoNombreConfirmado(this.registroraza);
+  final NickFormado nick;
+  MostrandoNombreConfirmado(this.registroraza, this.nick);
 }
 
-class MonstrandoNombreNoConfirmado extends Estados {
+class MonstrandoNombreSinSubraza extends Estados {
   final NickFormado nick;
-  MonstrandoNombreNoConfirmado(this.nick);
+  MonstrandoNombreSinSubraza(this.nick);
 }
 
 class BlocVerificacion extends Bloc<Eventos, Estados> {
@@ -45,15 +49,15 @@ class BlocVerificacion extends Bloc<Eventos, Estados> {
       final resultado =
           _repositorioVerificacion.obtenerRegistroUsuario(event.nick);
       resultado.match((l) {
-        l is VersionIncorrectaJson
-            ? emit(MostrandoSolicitudActualizacion())
-            : null;
+        /*     l is VersionIncorrectaJson
+            ? emit(MostrandoNoEncontrado())
+            : null; */
 
-        l is RazaNoRegistrada
-            ? emit(MonstrandoNombreNoConfirmado(event.nick))
-            : null;
+        l is sinSubRazas ? emit(MonstrandoNombreSinSubraza(event.nick)) : null;
+
+        l is RazaNoRegistrada ? emit(MostrandoNoEncontrado(event.nick)) : null;
       }, (r) {
-        emit(MostrandoNombreConfirmado(r));
+        emit(MostrandoNombreConfirmado(r, event.nick));
       });
     });
   }

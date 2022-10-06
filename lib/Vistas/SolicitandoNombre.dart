@@ -33,7 +33,6 @@ class _VistaSolicitandoNombreState extends State<VistaSolicitandoNombre> {
       padding: const EdgeInsets.all(10.0),
       child: Column(children: [
         TextField(
-          obscureText: true,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Usuario',

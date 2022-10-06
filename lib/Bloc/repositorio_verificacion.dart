@@ -43,10 +43,6 @@ class VerificacionJson extends repositorioVerificacion {
         ? left(sinSubRazas())
         : right(documento['message']); */
 
-    if (documento['status'] == null) {
-      return left(VersionIncorrectaJson());
-    }
-
     if (documento['status'] == "error") {
       return left(RazaNoRegistrada());
     }

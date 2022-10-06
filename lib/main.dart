@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Bloc/Bloc.dart';
 import 'package:flutter_application_1/Bloc/repositorio_verificacion.dart';
 import 'package:flutter_application_1/Vistas/SolicitandoNombre.dart';
+import 'package:flutter_application_1/Vistas/Solicitudactualizacion.dart';
+import 'package:flutter_application_1/Vistas/vistaRazas.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'Vistas/VistaSinRazas.dart';
 
 void main() {
   runApp(const AplicacionInyectada());
@@ -41,6 +45,16 @@ class Aplicacion extends StatelessWidget {
 
               if (estado is SolicitandoNombre) {
                 return const VistaSolicitandoNombre();
+              }
+              if (estado is MonstrandoNombreSinSubraza) {
+                return Sinrazas(estado.nick);
+              }
+
+              if (estado is MostrandoNombreConfirmado) {
+                return VistaRaza(estado.nick, estado.registroraza);
+              }
+              if (estado is MostrandoNoEncontrado) {
+                return SolicitudDeActualizacion(estado.nick);
               }
 
               return const Center(child: Text('HUYE'));
