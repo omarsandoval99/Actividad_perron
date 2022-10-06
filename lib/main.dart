@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/Bloc/Bloc.dart';
+import 'package:flutter_application_1/Bloc/repositorio_verificacion.dart';
 import 'package:flutter_application_1/Vistas/SolicitandoNombre.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -14,7 +15,8 @@ class AplicacionInyectada extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        BlocVerificacion blocVerificacion = BlocVerificacion();
+        BlocVerificacion blocVerificacion =
+            BlocVerificacion(VerificacionJson());
 
         blocVerificacion.add(Creado());
 

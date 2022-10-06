@@ -2,23 +2,20 @@ const String mensajeRegistroError = "Registro de raza incompleto";
 const String mensajeCampoVacio = "Sin valor";
 
 class RegistroRaza {
-  late final String nombre;
+  late final List subraza;
+  late final String status;
+  RegistroRaza._(this.subraza, this.status);
 
-  RegistroRaza._(this.nombre);
-
-  factory RegistroRaza.constructor({
-    required String nombre,
-  }) {
-    if (nombre == "") {
+  factory RegistroRaza.constructor(
+      {required List subraza, required String status}) {
+    if (subraza == "") {
       throw mensajeCampoVacio;
     }
-    if (nombre == null) {
+    if (subraza == null) {
       throw mensajeRegistroError;
     }
 
-    nombre = nombre.trim().isEmpty ? mensajeCampoVacio : nombre;
-    RegistroRaza._(nombre);
-    final resultado = RegistroRaza._(nombre);
+    final resultado = RegistroRaza._(subraza, status);
 
     return resultado;
   }

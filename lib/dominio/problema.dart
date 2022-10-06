@@ -1,5 +1,7 @@
-class problema {}
+class Problema {}
 
-class RazaNoRegistrada extends problema {}
+class RazaNoRegistrada extends Problema {}
 
-class VersionIncorrectaJson extends problema {}
+class VersionIncorrectaJson extends Problema {}
+
+class sinSubRazas extends Problema {}
